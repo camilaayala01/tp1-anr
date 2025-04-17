@@ -44,6 +44,7 @@ export function setRate(rateRequest) {
   const { baseCurrency, counterCurrency, rate } = rateRequest;
 
   rates[baseCurrency][counterCurrency] = rate;
+  //no chequea que no sea 0
   rates[counterCurrency][baseCurrency] = Number((1 / rate).toFixed(5));
 }
 
@@ -65,6 +66,8 @@ export async function exchange(exchangeRequest) {
   const baseAccount = findAccountByCurrency(baseCurrency);
   //find our account on the counter currency
   const counterAccount = findAccountByCurrency(counterCurrency);
+
+  //no chequea que las cuentas no den null
 
   //construct the result object with defaults
   const exchangeResult = {
