@@ -116,6 +116,8 @@ export async function exchange(exchangeRequest) {
     }
   }
 
+  //no chequea que las cuentas no den null
+
   //construct the result object with defaults
   const exchangeResult = {
     id: nanoid(),

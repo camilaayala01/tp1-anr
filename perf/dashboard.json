@@ -123,7 +123,9 @@
     {
       "aliasColors": {
         "Completed": "#7EB26D",
-        "Errored": "#BF1B00",
+        "Connection Reset": "#ebba34",
+        "Timeout": "#eb9b34",
+        "Other Error": "#BF1B00",
         "Errors count": "#BF1B00",
         "Pending": "#447EBC",
         "Requests completed": "#7EB26D",
@@ -181,21 +183,30 @@
       "steppedLine": false,
       "targets": [
         {
-          "refId": "B",
-          "target": "alias(sumSeries(stats.gauges.$server.errors.*), 'Errored')",
-          "textEditor": true
-        },
-        {
           "refId": "A",
           "target": "alias(stats.gauges.$server.codes.200, 'Completed')"
         },
         {
+          "refId": "B",
+          "target": "alias(sumSeries(stats.gauges.$server.errors.ECONNRESET), 'Connection Reset')",
+          "textEditor": true
+        },
+        {
           "refId": "C",
+          "target": "alias(sumSeries(stats.gauges.$server.errors.ETIMEDOUT), 'Timeout')",
+          "textEditor": true
+        },
+        {
+          "refId": "E",
           "target": "alias(stats.gauges.$server.pendingRequests, 'Pending')"
         },
         {
-          "refId": "D",
+          "refId": "F",
           "target": "alias(stats.gauges.$server.codes.429, 'Limited')"
+        },
+        {
+          "refId": "G",
+          "target": "alias(stats.gauges.$server.codes.500, 'Internal Server Error')"
         }
       ],
       "thresholds": [],

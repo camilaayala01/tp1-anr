@@ -1,0 +1,32 @@
+config:
+  environments:
+    api:
+      target: "http://localhost:5555"
+      plugins:
+        statsd:
+          host: localhost
+          port: 8125
+          prefix: "artillery-api"
+  pool: 50 # All HTTP requests from all virtual users will be sent over the same connections
+
+  phases:
+    - name: Warmup
+      duration: 1000
+      arrivalRate: 1
+      rampTo: 300
+    - name: Normal 
+      duration: 3000
+      arrivalRate: 300
+   
+scenarios:
+  - name: Exchange Endurance (/exchange)
+    flow:
+      - post:
+          url: '/exchange'
+          json:
+            baseCurrency: "ARS"
+            counterCurrency: "EUR"
+            baseAccountId: 2
+            counterAccountId: 3
+            baseAmount: 1.0
+            
